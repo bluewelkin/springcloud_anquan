@@ -1,0 +1,11 @@
+spring:
+  application:
+    name: user-api
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root
+    password: root
+    url: jdbc:mysql://127.0.0.1:3306/springcloud_anquan?characterEncoding=utf-8&useSSL=false&serverTimezone=UTC
+  jpa:
+    generate-ddl: true
+    show-sql: true
