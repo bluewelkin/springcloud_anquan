@@ -1,37 +1,69 @@
+/**
+ *
+ */
 package com.imooc.security.user;
+
+import java.io.IOException;
+import java.util.List;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import com.lambdaworks.crypto.SCryptUtil;
 
+/**
+ * @author jojo
+ *
+ */
 @Service
 public class UserServiceImpl implements UserService {
-    @Autowired UserRepository userRepository;
-    public UserInfo Create(UserInfo info) {
+
+    @Autowired
+    private UserRepository userRepository;
+
+
+    public UserInfo create(UserInfo info) throws IOException {
         User user = new User();
         BeanUtils.copyProperties(info, user);
-        //	user.setPassword(SCryptUtil.scrypt(user.getPassword(), 32768, 8, 1));
+        user.setPassword(SCryptUtil.scrypt(user.getPassword(), 32768, 8, 1));
         userRepository.save(user);
         info.setId(user.getId());
         return info;
     }
 
-    public UserInfo update(UserInfo UserInfo) {
+
+    public UserInfo update(UserInfo user) {
+        // TODO Auto-generated method stub
         return null;
     }
+
 
     public void delete(Long id) {
+        // TODO Auto-generated method stub
 
     }
 
+
     public UserInfo get(Long id) {
-        return null;
+        return userRepository.findById(id).get().buildInfo();
     }
 
 
     public List<UserInfo> query(String name) {
+        // TODO Auto-generated method stub
         return null;
     }
+
+
+    public UserInfo login(UserInfo info) {
+        UserInfo result = null;
+        User user = userRepository.findByUsername(info.getUsername());
+        if (user != null && SCryptUtil.check(info.getPassword(), user.getPassword())) {
+            result = user.buildInfo();
+        }
+        return result;
+    }
+
 }
+
