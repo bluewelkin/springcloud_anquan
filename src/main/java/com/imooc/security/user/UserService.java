@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface UserService {
 
-     UserInfo Create(UserInfo UserInfo);
+     UserInfo Create(UserInfo info);
 
 
      UserInfo update(UserInfo UserInfo);

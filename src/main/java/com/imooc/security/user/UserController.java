@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController
-@RequestMapping("/UserInfos")
+@RequestMapping("/users")
 public class UserController {
 /*
     @Autowired
@@ -19,9 +19,12 @@ public class UserController {
 @Autowired
 private  UserRepository userRepository;
 
+    @Autowired
+    private UserService userService;
+
     @PostMapping
-    public UserInfo Create(UserInfo UserInfo){
-        return UserInfo;
+    public UserInfo Create(@RequestBody  UserInfo info){
+        return userService.Create(info);
     }
 
     @PutMapping("/{id}")
