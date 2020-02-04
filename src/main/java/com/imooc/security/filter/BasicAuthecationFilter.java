@@ -1,11 +1,10 @@
 /**
- * 
+ *
  */
 package com.imooc.security.filter;
 
 import com.imooc.security.user.User;
 import com.imooc.security.user.UserRepository;
-import com.lambdaworks.crypto.SCryptUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -26,7 +25,7 @@ import java.io.IOException;
  */
 @Component
 public class BasicAuthecationFilter extends OncePerRequestFilter {
-	
+
 	@Autowired
 	private UserRepository userRepository;
 
@@ -36,7 +35,7 @@ public class BasicAuthecationFilter extends OncePerRequestFilter {
 	@Override
 	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
 			throws ServletException, IOException {
-		
+
 		System.out.println(2);
 
 		String authHeader = request.getHeader("Authorization");
