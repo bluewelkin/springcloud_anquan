@@ -20,6 +20,7 @@ public class User {
 
     @NotBlank(message = "用户名不能为空")
     //保证数据库这个字段唯一
+
     @Column(unique = true)
     private String username;
 
